@@ -1,5 +1,8 @@
-export interface Invoice {
-  id: number;
+import { BaseEntity } from "./baseEntity";
+
+export interface Invoice extends BaseEntity {
   timesheetId: number;
-  createdDate: Date;
+  invoiceDate: Date;
+  dueDate: Date;
+  isPaid: boolean;
 }

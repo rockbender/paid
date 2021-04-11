@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import { dataService } from "../services/dataService";
+import { invoiceService } from "../services/invoiceService";
 
 export const invoiceController = express.Router();
 
-const service = new dataService();
+const service = new invoiceService();
 
 invoiceController.get("/", (req: Request, res: Response) => {
   try {

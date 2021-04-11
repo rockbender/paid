@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import { invoiceController } from "./controllers/invoiceController";
+import { invoiceController } from "./controllers/invoicesController";
 
 dotenv.config();
 

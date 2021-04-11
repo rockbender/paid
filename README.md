@@ -24,3 +24,5 @@ Modules:
 - cors
 - dotenv
 - express
+- Joi
+- TypeORM
