@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import { invoiceController } from "./controllers/invoicesController";
+import { invoicesController } from "./controllers/invoicesController";
 
 dotenv.config();
 
@@ -14,7 +14,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use("/api/invoices", invoiceController);
+app.use("/api/invoices", invoicesController);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

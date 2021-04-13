@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import { invoiceService } from "../services/invoiceService";
 
-export const invoiceController = express.Router();
+export const invoicesController = express.Router();
 
 const service = new invoiceService();
 
-invoiceController.get("/", (req: Request, res: Response) => {
+invoicesController.get("/", (req: Request, res: Response) => {
   try {
     const invoices = service.findAll();
     res.status(200).send(invoices);
@@ -14,7 +14,7 @@ invoiceController.get("/", (req: Request, res: Response) => {
   }
 });
 
-invoiceController.get("/:id", (req: Request, res: Response) => {
+invoicesController.get("/:id", (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id, 0);
   try {
     const invoices = service.findAll().filter((x) => x.id === id);
@@ -29,7 +29,7 @@ invoiceController.get("/:id", (req: Request, res: Response) => {
   }
 });
 
-invoiceController.put("/:id", (req: Request, res: Response) => {
+invoicesController.put("/:id", (req: Request, res: Response) => {
   try {
     res.status(201).send();
   } catch (e) {
@@ -37,6 +37,6 @@ invoiceController.put("/:id", (req: Request, res: Response) => {
   }
 });
 
-invoiceController.post("/", (req: Request, res: Response) => {
+invoicesController.post("/", (req: Request, res: Response) => {
   res.status(201).send("OK");
 });
