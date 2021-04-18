@@ -1,7 +1,18 @@
 import { BaseEntity } from "./baseEntity";
 import { TimeEntry } from "./timeEntry";
+import { Entity, Column } from "typeorm";
 
-export interface Timesheet extends BaseEntity {
+@Entity()
+export class Timesheet extends BaseEntity {
+  @Column()
   projectId: number;
+
+  @Column()
   timeEntries: TimeEntry[];
+
+  @Column()
+  periodStartDate: Date;
+
+  @Column()
+  periodEndDate: Date;
 }

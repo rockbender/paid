@@ -1,8 +1,17 @@
 import { BaseEntity } from "./baseEntity";
+import { Column, Entity } from "typeorm";
 
-export interface Invoice extends BaseEntity {
+@Entity()
+export class Invoice extends BaseEntity {
+  @Column()
   timesheetId: number;
+
+  @Column()
   invoiceDate: Date;
+
+  @Column()
   dueDate: Date;
+
+  @Column()
   isPaid: boolean;
 }

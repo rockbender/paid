@@ -1,7 +1,17 @@
 import { BaseEntity } from "./baseEntity";
+import { Entity, Column } from "typeorm";
 
-export interface TimeEntry extends BaseEntity {
+@Entity()
+export class TimeEntry extends BaseEntity {
+  @Column()
+  timeSheetId: number;
+
+  @Column()
   startDate: Date;
+
+  @Column()
   endDate: Date;
+
+  @Column()
   description: string;
 }

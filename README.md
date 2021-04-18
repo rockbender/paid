@@ -2,6 +2,13 @@
 
 A simple webapp to create and manage invoices for self employed.
 
+# Setup
+
+## Database
+
+Setup mariadb database and optionally enable remote access by following this guide.
+https://websiteforstudents.com/configure-remote-access-mysql-mariadb-databases/
+
 # Mindmap
 
 https://whimsical.com/paid-LyVK8kNf2bZ7mnpLnC22au
