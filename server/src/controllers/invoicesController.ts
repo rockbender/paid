@@ -5,9 +5,9 @@ export const invoicesController = express.Router();
 
 const service = new invoicesService();
 
-invoicesController.get("/", (req: Request, res: Response) => {
+invoicesController.get("/", async (req: Request, res: Response) => {
   try {
-    const invoices = service.findAll();
+    const invoices = await service.findAll();
     res.status(200).send(invoices);
   } catch (e) {
     res.status(500).send(e.message);

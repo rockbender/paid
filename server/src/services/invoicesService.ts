@@ -1,25 +1,15 @@
 import { Invoice } from "../domain/models/invoice";
-import { getConnection, Repository } from "typeorm";
+import { Repository, getRepository } from "typeorm";
 
 export class invoicesService {
   private repository: Repository<Invoice>;
 
   constructor() {
-    this.repository = getConnection().getRepository(Invoice);
+    // this.repository = getRepository(Invoice);  // TODO: Rishi - Why is the repository not available in constructor?
   }
 
-  private fakeInvoice: Invoice = {
-    id: 1,
-    timesheetId: 1,
-    createdDate: new Date(),
-    dueDate: new Date(2099, 1, 1),
-    invoiceDate: new Date(),
-    isPaid: false,
-  };
-
   public async findAll(): Promise<Invoice[]> {
-    const temp = await this.repository.find();
-    return temp;
-    // return [this.fakeInvoice];
+    this.repository = getRepository(Invoice);
+    return await this.repository.find();
   }
 }

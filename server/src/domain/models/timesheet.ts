@@ -7,7 +7,6 @@ export class Timesheet extends BaseEntity {
   @Column()
   projectId: number;
 
-  @Column()
   timeEntries: TimeEntry[];
 
   @Column()
