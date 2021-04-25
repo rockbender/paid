@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { createConnection } from "typeorm";
 import { invoicesController } from "./controllers/invoicesController";
+import { timesheetsController } from "./controllers/timesheetsController";
 import { Invoice } from "./domain/models/invoice";
 import { Timesheet } from "./domain/models/timesheet";
 import { Project } from "./domain/models/project";
@@ -31,9 +32,12 @@ async function main(): Promise<void> {
   app.use(cors());
   app.use(express.json());
   app.use("/api/invoices", invoicesController);
+  app.use("/api/timesheets", timesheetsController);
 
   app.get("/", (req, res) => {
-    res.send("Hello World");
+    res.send(
+      JSON.stringify({ "Available Controllers": ["invoices", "timesheets"] })
+    );
   });
 
   app.listen(PORT, () => {

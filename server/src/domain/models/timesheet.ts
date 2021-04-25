@@ -2,7 +2,7 @@ import { BaseEntity } from "./baseEntity";
 import { TimeEntry } from "./timeEntry";
 import { Entity, Column } from "typeorm";
 
-@Entity()
+@Entity("Timesheet")
 export class Timesheet extends BaseEntity {
   @Column()
   projectId: number;

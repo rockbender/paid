@@ -33,3 +33,8 @@ Modules:
 - express
 - Joi
 - TypeORM
+
+## Database
+
+- Mariadb is the database of choice
+- The primary key in each table is `id` of type `INT` in the database. Preferrably it would be `BIGINT` but typeorm maps them to `string` which is less performant for filters vs. `number`.
