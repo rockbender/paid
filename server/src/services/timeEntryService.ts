@@ -12,4 +12,14 @@ export class timeEntryService {
     this.repository = getRepository(TimeEntry);
     return await this.repository.find();
   }
+
+  public async add(entity: TimeEntry): Promise<boolean> {
+    const result = await getRepository(TimeEntry).insert(entity);
+
+    if (result.generatedMaps !== null) {
+      return true;
+    }
+
+    return false;
+  }
 }

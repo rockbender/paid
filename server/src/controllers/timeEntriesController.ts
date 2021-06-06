@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { TimeEntry } from "../domain/models/timeEntry";
 import { timeEntryService } from "../services/timeEntryService";
 
 export const timeEntriesController = express.Router();
@@ -40,5 +41,10 @@ timeEntriesController.put("/:id", (req: Request, res: Response) => {
 });
 
 timeEntriesController.post("/", (req: Request, res: Response) => {
-  res.status(201).send("OK");
+  try {
+    const entity = req.body as TimeEntry;
+    service.add(entity);
+  } catch (e) {
+    res.status(500).send("Error");
+  }
 });
