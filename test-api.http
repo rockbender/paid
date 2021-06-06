@@ -1,0 +1,13 @@
+# GET http://192.168.0.171:4000/api/timeentries
+
+
+POST http://192.168.0.171:4000/api/timeentries
+content-type: application/json
+
+{
+    "timesheetId": 4,
+    "startDate": "2021-04-25 10:00",
+    "endDate": "2021-04-25 17:00",
+    "desciption": "added thru code",
+    "createdDate": "2021-04-27"
+}
