@@ -1,0 +1,21 @@
+.invoice-font {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.work-item-cell {
+  background: #F7F7F7;
+  border: 2px solid white;
+  border-radius: 2px;
+  padding: 3px 5px 3px 5px;
+  min-height: 34px;
+}
+
+.due-date-cell {
+  @extend .work-item-cell;
+  border: none;
+}
+
+.work-item-cell-nocolor {
+  @extend .work-item-cell;
+  background: #fff;
+}

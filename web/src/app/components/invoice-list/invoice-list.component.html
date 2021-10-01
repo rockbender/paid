@@ -1,0 +1,26 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Invoice #</th>
+        <th>Project</th>
+        <th>Amount</th>
+        <th>Due Date</th>
+        <th>Is Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let invoice of invoices">
+        <td><a [routerLink]="['/invoice', invoice.invoiceNumber]">{{invoice.invoiceNumber}}</a></td>
+        <td>{{invoice.projectName}}</td>
+        <td>{{invoice.amount}}</td>
+        <td>{{invoice.dueDate}}</td>
+        <td>
+          <i class="fas fa-check" *ngIf="invoice.isPaid"></i>
+          <i class="fas fa-times" *ngIf="!invoice.isPaid"></i>
+        </td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>

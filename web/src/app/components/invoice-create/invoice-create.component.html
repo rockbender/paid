@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="h3">Create Invoice</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="invoiceForm">
+        <div class="form-group">
+          <label for="project">Project</label>
+          <input type="text" class="form-control" id="projectSelection" formControlName="selectedProject" aria-describedby="projectError" placeholder="Select Project">
+          <!-- <small id="projectError" class="form-text text-muted">Select a project</small> -->
+        </div>
+        <div class="form-group">
+          <label for="project">Due Date</label>
+          <input type="date" class="form-control" id="dueDate" formControlName="dueDate" aria-describedby="projectError" placeholder="Select Project">
+        </div>
+        <div class="custom-control custom-switch mb-2">
+          <input type="checkbox" class="custom-control-input" id="hasInvoicePeriod" formControlName="hasInvoicePeriod" (ngModelChange)="onHasInvoicePeriod($event)">
+          <label class="custom-control-label" for="hasInvoicePeriod">Invoice Period</label>
+        </div>
+        <div class="form-group" *ngIf="showInvoicePeriod">
+          <label for="project">Invoice Period</label>
+          <div class="input-group">
+            <input type="date" class="form-control" id="startDate" formControlName="startDate" aria-describedby="projectError" placeholder="From Date" ngClass="{'is-invalid': !startDateC.valid}">
+            <input type="date" class="form-control" id="endDate" formControlName="endDate" aria-describedby="projectError" placeholder="To Date">
+          </div>
+          <div class="input-group">
+            <small *ngIf="startDateC?.invalid || endDateC?.invalid" class="form-text text-danger">Invoice Period is required</small>
+          </div>
+          <!-- <small id="projectError" class="form-text text-muted">Select a project</small> -->
+        </div>
+        <div class="grid my-3">
+          <div class="row">
+            <div class="col-md-6">
+              <label for="">Description</label>
+            </div>
+            <div class="col-md-6">
+              <label for="">Hours</label>
+            </div>
+          </div>
+          <div formArrayName="descriptions">
+            <div class="input-group" *ngFor="let d of descriptions;">
+              <div [formGroup]="d" class="input-group">
+                <input type="text" class="form-control" formControlName="desc">
+                <input type="text" class="form-control" formControlName="hours">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="btn btn-outline-secondary mr-2" (click)="onCancel()">Cancel</div>
+        <div class="btn btn-primary" (click)="onCreate()">Create</div>
+        <div class="btn btn-secondary float-right" (click)="onPreview()"><i class="fas fa-eye"></i> Preview</div>
+      </form>
+    </div>
+  </div>
+</div>
