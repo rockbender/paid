@@ -29,7 +29,7 @@ Paid web app, to manage timesheet and invoices for consultants.
 - [x] Can create a new invoice and add to in-memory data
 - [x] On create Invoice, get invoice total from work items
 - [x] Can view details of each invoice
-- [ ] Can download a rudimentary version of an invoice
+- [x] Can download a rudimentary version of an invoice
 
 ## Components
 app
