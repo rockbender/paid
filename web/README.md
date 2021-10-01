@@ -34,6 +34,7 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [x] Can print a rudimentary version of the invoice
 
 ## Components
+```
 app
   header
   menubar
@@ -43,6 +44,7 @@ app
   timesheet-list / timesheet-detail
   settings
   footer
+```
 
 ## Router
 ```json
