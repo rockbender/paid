@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Invoice, WorkItem } from 'src/app/models/Invoice';
 import { InvoiceService } from 'src/app/services/invoice.service';
@@ -18,6 +18,7 @@ export class InvoiceCreateComponent implements OnInit {
     const arr =  this.invoiceForm.get('descriptions') as FormArray;
     return arr.controls as FormGroup[];
   }
+  get invoicePeriodC() { return this.invoiceForm.get('period'); }
   get startDateC() { return this.invoiceForm.get('startDate'); }
   get endDateC() { return this.invoiceForm.get('endDate'); }
 
@@ -28,11 +29,13 @@ export class InvoiceCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.invoiceForm = this.fb.group({
-      selectedProject: 'IronWorks',
+      selectedProject: ['', Validators.required],
       dueDate: '',
-      startDate: '',
-      endDate: '',
       hasInvoicePeriod: false,
+      period: this.fb.group({
+        startDate: '',
+        endDate: ''
+      }),
       descriptions: this.fb.array([
         this.buildDescription(),
         this.buildDescription(),
@@ -73,6 +76,10 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   onCreate() {
+    if(this.invoiceForm.invalid) {
+      return;
+    }
+
     const values = this.invoiceForm.value;
     const invoiceToAdd: Invoice = {
       amount: this.getInvoiceTotal(),
@@ -98,10 +105,8 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   onHasInvoicePeriod(value: boolean): void {
-    console.log('onHasInvoicePeriod clicked', value);
     if(value) {
-      this.startDateC?.addValidators(Validators.required);
-      this.endDateC?.addValidators(Validators.required);
+      this.invoicePeriodC?.addValidators(this.invoicePeriodValidator);
     } else {
       this.startDateC?.clearValidators();
       this.endDateC?.clearValidators();
@@ -109,5 +114,20 @@ export class InvoiceCreateComponent implements OnInit {
 
     this.endDateC?.updateValueAndValidity();
     this.endDateC?.updateValueAndValidity();
+  }
+
+  invoicePeriodValidator(c: AbstractControl): { [key: string]: boolean } | null {
+    const startDate = c.get('startDate');
+    const endDate = c.get('endDate');
+
+    if(startDate?.value === "" || endDate?.value === "") {
+      return { 'required': true };
+    }
+
+    if(new Date(startDate?.value) > new Date(endDate?.value)) {
+      return {'dateRange': true};
+    }
+    
+    return null;
   }
 }

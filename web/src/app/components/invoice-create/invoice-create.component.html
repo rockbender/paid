@@ -22,14 +22,16 @@
         </div>
         <div class="form-group" *ngIf="showInvoicePeriod">
           <label for="project">Invoice Period</label>
-          <div class="input-group">
+          <div class="input-group" formGroupName="period">
             <input type="date" class="form-control" id="startDate" formControlName="startDate" aria-describedby="projectError" placeholder="From Date" ngClass="{'is-invalid': !startDateC.valid}">
             <input type="date" class="form-control" id="endDate" formControlName="endDate" aria-describedby="projectError" placeholder="To Date">
           </div>
           <div class="input-group">
-            <small *ngIf="startDateC?.invalid || endDateC?.invalid" class="form-text text-danger">Invoice Period is required</small>
+            <span *ngIf="invoicePeriodC?.invalid">
+              <small *ngIf="invoicePeriodC?.errors?.required" class="form-text text-danger">Both dates are required</small>
+              <small *ngIf="invoicePeriodC?.errors?.dateRange" class="form-text text-danger">Start Date cannot be after End Date</small>
+            </span>
           </div>
-          <!-- <small id="projectError" class="form-text text-muted">Select a project</small> -->
         </div>
         <div class="grid my-3">
           <div class="row">
@@ -57,3 +59,4 @@
     </div>
   </div>
 </div>
+<p>{{invoiceForm.value | json }}</p>
