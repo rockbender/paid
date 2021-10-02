@@ -2,6 +2,10 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.invoice-footer {
+  color: green;
+}
+
 .work-item-cell {
   background: #F7F7F7;
   border: 2px solid white;
@@ -18,4 +22,27 @@
 .work-item-cell-nocolor {
   @extend .work-item-cell;
   background: #fff;
+}
+
+@media print {
+  #invoice-preview {
+    margin: 25mm;
+  }
+
+  .invoice-subfooter {
+    position: absolute;
+    bottom: 50mm;
+    width: 100%;
+    padding-right: 40mm;
+  }
+
+  .invoice-footer {
+    position: absolute;
+    bottom: 25mm;
+    margin: 0mm;
+    width: 100%;
+    //Fixed padding to center the element, width 100% overrides margin
+    // and the element ends up being off centered
+    padding-right: 60mm;
+  }
 }

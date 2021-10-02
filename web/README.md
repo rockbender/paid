@@ -16,7 +16,7 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [ ] Add Create Invoice Validation in UI
 - [ ] Add Create Invoice validation in API
 
-## Milestone Notes v.0.2 (with-api)
+## Release Notes v.0.2 (with-api)
 - [ ] Home page loads invoices from db
 - [ ] Created invoice saves to db
 - [ ] Can add a project
@@ -26,11 +26,11 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [ ] Hide infobar in all create/detail page
 - [ ] Fix print margins
 
-## Milestone Notes v.0.1 (no-api)
+## Release Notes v.0.1 (no-api)
 - [x] Home page load in-memory invoices in tabular format
 - [x] Can create a new invoice and add to in-memory data
 - [x] On create Invoice, get invoice total from work items
-- [x] Can view details of each invoice
+- [x] Can view detail of each invoice
 - [x] Can print a rudimentary version of the invoice
 
 ## Components
