@@ -22,10 +22,7 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   get showInvoicePeriod() { return this.invoiceForm.get('hasInvoicePeriod')?.value; }
-  get descriptions() {
-    const arr =  this.invoiceForm.get('descriptions') as FormArray;
-    return arr.controls as FormGroup[];
-  }
+  get workItems(): FormArray { return <FormArray>this.invoiceForm.get('workItems'); }
   get invoicePeriodC() { return this.invoiceForm.get('period'); }
   get startDateC() { return this.invoiceForm.get('startDate'); }
   get endDateC() { return this.invoiceForm.get('endDate'); }
@@ -44,10 +41,10 @@ export class InvoiceCreateComponent implements OnInit {
         startDate: '',
         endDate: ''
       }),
-      descriptions: this.fb.array([
-        this.buildDescription(),
-        this.buildDescription(),
-        this.buildDescription(),
+      workItems: this.fb.array([
+        this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
       ]) as FormArray
     });
 
@@ -60,14 +57,14 @@ export class InvoiceCreateComponent implements OnInit {
     );
   }
 
-  buildDescription(): FormGroup {
+  buildWorkItem(): FormGroup {
     return this.fb.group({
       desc: '', hours: ''
     });
   }
 
   getInvoiceTotal(): number {
-    const workItems = this.invoiceForm.value['descriptions'];
+    const workItems = this.invoiceForm.value['workItems'];
     let total = 0;
     //TODO Rishi - Use reduce
     workItems.forEach((w: any) => {
@@ -79,7 +76,7 @@ export class InvoiceCreateComponent implements OnInit {
 
   getWorkItems(): WorkItem[] {
     let workItems: WorkItem[] = [];
-    this.descriptions.forEach(x => workItems.push({
+    this.workItems.controls.forEach(x => workItems.push({
       description: x.value.desc,
       hours: x.value.hours,
     } as WorkItem))
@@ -146,7 +143,7 @@ export class InvoiceCreateComponent implements OnInit {
     return null;
   }
 
-  //TODO Generalize it, currently it onlyl serves Period control
+  //TODO Generalize it, currently it only serves Period control
   setValidationMessage(c: AbstractControl): void {
     this.periodValidationMessage = '';
     if((c.touched || c.dirty) && c.errors) {

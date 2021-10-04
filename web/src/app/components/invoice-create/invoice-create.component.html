@@ -39,9 +39,9 @@
               <label for="">Hours</label>
             </div>
           </div>
-          <div formArrayName="descriptions">
-            <div class="input-group" *ngFor="let d of descriptions;">
-              <div [formGroup]="d" class="input-group">
+          <div formArrayName="workItems">
+            <div class="input-group" *ngFor="let wi of workItems.controls; let i =index">
+              <div [formGroupName]="i" class="input-group">
                 <input type="text" class="form-control" formControlName="desc">
                 <input type="text" class="form-control" formControlName="hours">
               </div>
