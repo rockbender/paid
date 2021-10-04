@@ -10,8 +10,16 @@ import { InvoiceService } from 'src/app/services/invoice.service';
   styleUrls: ['./invoice-create.component.scss']
 })
 export class InvoiceCreateComponent implements OnInit {
+  readonly rate: number = 80;  // TODO Rishi - Get this from ProjectService;
   invoiceForm!: FormGroup;
-  rate: number = 80;  // TODO Rishi - Get this from ProjectService;
+  periodValidationMessage!: string;
+  
+  private validationMessages = {
+    period: {
+      required: 'Both dates are required',
+      dateRange: 'Start Date cannot be after end date'
+    }
+  }
 
   get showInvoicePeriod() { return this.invoiceForm.get('hasInvoicePeriod')?.value; }
   get descriptions() {
@@ -42,6 +50,14 @@ export class InvoiceCreateComponent implements OnInit {
         this.buildDescription(),
       ]) as FormArray
     });
+
+    this.invoiceForm.get('hasInvoicePeriod')?.valueChanges.subscribe(
+      value => this.onHasInvoicePeriod(value)
+    );
+
+    this.invoicePeriodC?.valueChanges.subscribe(
+      value => this.setValidationMessage(this.invoicePeriodC!)
+    );
   }
 
   buildDescription(): FormGroup {
@@ -112,8 +128,7 @@ export class InvoiceCreateComponent implements OnInit {
       this.endDateC?.clearValidators();
     }
 
-    this.endDateC?.updateValueAndValidity();
-    this.endDateC?.updateValueAndValidity();
+    this.invoicePeriodC?.updateValueAndValidity();
   }
 
   invoicePeriodValidator(c: AbstractControl): { [key: string]: boolean } | null {
@@ -129,5 +144,17 @@ export class InvoiceCreateComponent implements OnInit {
     }
     
     return null;
+  }
+
+  //TODO Generalize it, currently it onlyl serves Period control
+  setValidationMessage(c: AbstractControl): void {
+    this.periodValidationMessage = '';
+    if((c.touched || c.dirty) && c.errors) {
+      if(c.errors['required']) {
+        this.periodValidationMessage = this.validationMessages.period.required;
+      } else if(c.errors['dateRange']) {
+        this.periodValidationMessage = this.validationMessages.period.dateRange;
+      }
+    }
   }
 }
