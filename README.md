@@ -32,6 +32,7 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [x] On create Invoice, get invoice total from work items
 - [x] Can view detail of each invoice
 - [x] Can print a rudimentary version of the invoice
+- [x] Add navigation guard to invoice create page
 
 ## Components
 ```
