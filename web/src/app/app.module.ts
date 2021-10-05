@@ -12,7 +12,8 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { RouterModule } from '@angular/router';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { InvoiceCreateComponent } from './components/invoice-create/invoice-create.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InvoiceCreateGuard } from './guards/invoice-create.guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
       { path: "", component: InvoiceListComponent },
       { path: "invoices", component: InvoiceListComponent },
       { path: "invoice/:id", component: InvoiceDetailComponent},
-      { path: "new-invoice", component: InvoiceCreateComponent},
+      { path: "new-invoice", component: InvoiceCreateComponent, canDeactivate: [InvoiceCreateGuard]},
       { path: "timesheets", component: TimesheetListComponent },
       { path: "settings", component: SettingsComponent },
     ])
