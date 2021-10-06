@@ -11,7 +11,7 @@ export class InvoiceCreateGuard implements CanDeactivate<InvoiceCreateComponent>
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): boolean {
-      if(component.invoiceForm.dirty) {
+      if(component.invoiceForm.dirty && !component.changesSaved) {
         return confirm("Are you sure you want to navigate away. All unsaved changes will be lost.");
       }
     return true;

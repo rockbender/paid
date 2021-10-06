@@ -13,6 +13,7 @@ export class InvoiceCreateComponent implements OnInit {
   readonly rate: number = 80;  // TODO Rishi - Get this from ProjectService;
   invoiceForm!: FormGroup;
   periodValidationMessage!: string;
+  changesSaved: boolean = false;
   
   private validationMessages = {
     period: {
@@ -106,6 +107,7 @@ export class InvoiceCreateComponent implements OnInit {
     }
 
     this.invoiceService.addInvoice(invoiceToAdd);
+    this.changesSaved = true;
     this.navigateToInvoices();
   }
 
@@ -121,8 +123,7 @@ export class InvoiceCreateComponent implements OnInit {
     if(value) {
       this.invoicePeriodC?.addValidators(this.invoicePeriodValidator);
     } else {
-      this.startDateC?.clearValidators();
-      this.endDateC?.clearValidators();
+      this.invoicePeriodC?.clearValidators();
     }
 
     this.invoicePeriodC?.updateValueAndValidity();
