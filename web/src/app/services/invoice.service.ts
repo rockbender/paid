@@ -14,7 +14,7 @@ export class InvoiceService {
       creationDate: 'Aug 15, 2021',
       dueDate: 'Aug 31, 2021',
       projectId: 100,
-      projectName: 'EFRY',
+      projectName: 'Forestry Inc.',
       isPaid: true,
       amount: 4500,
       workItems: [{
@@ -26,7 +26,7 @@ export class InvoiceService {
       creationDate: 'Sep 1, 2021',
       dueDate: 'Sep 15, 2021',
       projectId: 100,
-      projectName: 'EFRY',
+      projectName: 'Forestry Inc.',
       isPaid: true,
       amount: 6300,
       workItems: [{
@@ -38,7 +38,7 @@ export class InvoiceService {
       creationDate: 'Sep 15, 2021',
       dueDate: 'Sep 31, 2021',
       projectId: 100,
-      projectName: 'WSBC',
+      projectName: 'Ocean Inc.',
       isPaid: false,
       amount: 3500,
       workItems: [{
