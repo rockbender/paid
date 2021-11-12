@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Paid.Api.aspnet
+namespace Paid.Api
 {
     public class Program
     {

@@ -6,7 +6,7 @@ using Paid.Domain.Models;
 using Paid.Database.Repositories;
 using Paid.Implementation.QueryParameters;
 
-namespace Paid.Api.aspnet.Controllers
+namespace Paid.Api.Controllers
 {
     [ApiController]
     [Route("api/[Controller]")]

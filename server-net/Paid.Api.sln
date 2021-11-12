@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.11
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paid.Api", "Paid.Api.aspnet\Paid.Api.csproj", "{AE0F4812-F8EA-4BBD-A23D-86F17F56407C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paid.Api", "Paid.Api\Paid.Api.csproj", "{AE0F4812-F8EA-4BBD-A23D-86F17F56407C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Paid.Domain", "Paid.Domain\Paid.Domain.csproj", "{988BB697-1E33-4113-8056-FBF4819219DB}"
 EndProject

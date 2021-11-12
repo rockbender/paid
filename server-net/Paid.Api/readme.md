@@ -1,21 +1,24 @@
-﻿# Run Docker Database
+﻿# Create and run a new Docker Database
 
 `docker run --name postgres -e POSTGRES_PASSWORD=abc123 -e POSTGRES_USER=sa -e POSTGRES_DB=paid-db -d -p 5432:5432 postgres`
+
+# Run an existing Docker Container
+`docker start postgres`
 
 # Create Data Migration
 
 From Paid.Domain/ directory, run:
-`dotnet ef --startup-project ../Paid.api.aspnet migrations add Temp -c PaidContext`
+`dotnet ef --startup-project ../Paid.Api migrations add Temp -c PaidContext`
 
 # Run Data Migration
 
 From Paid.Domain/ directory, run:
-`dotnet ef --startup-project ../Paid.api.aspnet database update`
+`dotnet ef --startup-project ../Paid.Api database update`
 
 # Create Migration Script (For Prod)
 
 From Paid.Domain/ directory, run:
-`dotnet ef --startup-project ../Paid.api.aspnet migrations script > migration_init_to_latest.sql`
+`dotnet ef --startup-project ../Paid.Api migrations script > migration_init_to_latest.sql`
 
 # Create db Scaffold
 
