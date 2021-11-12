@@ -34,6 +34,9 @@ namespace Paid.Api
                     x => x.MigrationsAssembly("Paid.Domain")
                 );
             });
+
+            // services.AddEndpointsApiExplorer();
+            services.AddSwaggerGen();
             // Load all assemblies and scan for profiles to load
             //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddAutoMapper(cfg => cfg.AddProfile<PaidProfile>());
@@ -45,6 +48,12 @@ namespace Paid.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                    options.RoutePrefix = string.Empty;     // Make it available at the root
+                });
             }
 
             app.UseRouting();
