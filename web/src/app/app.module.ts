@@ -14,6 +14,7 @@ import { InvoiceDetailComponent } from './components/invoice-detail/invoice-deta
 import { InvoiceCreateComponent } from './components/invoice-create/invoice-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InvoiceCreateGuard } from './guards/invoice-create.guard';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { InvoiceCreateGuard } from './guards/invoice-create.guard';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: "", component: InvoiceListComponent },
       { path: "invoices", component: InvoiceListComponent },
