@@ -25,6 +25,12 @@ namespace Paid.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opts => opts.AddDefaultPolicy(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+            ));
+
             services.AddControllers();
             services.AddScoped<IInvoiceRepository, InvoiceRepositoty>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
@@ -34,6 +40,7 @@ namespace Paid.Api
                     x => x.MigrationsAssembly("Paid.Domain")
                 );
             });
+
 
             // services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
@@ -55,6 +62,8 @@ namespace Paid.Api
                     options.RoutePrefix = string.Empty;     // Make it available at the root
                 });
             }
+
+            app.UseCors();
 
             app.UseRouting();
 
