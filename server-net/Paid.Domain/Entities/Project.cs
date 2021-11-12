@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+
+#nullable disable
+
+namespace Paid.Domain.Entities
+{
+    public partial class Project
+    {
+        public Project()
+        {
+            Invoices = new HashSet<Invoice>();
+        }
+
+        public int Id { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime? LogicallyDeletedDate { get; set; }
+        public int? Rate { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
+    }
+}
