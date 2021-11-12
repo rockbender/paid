@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
+import { createConnection } from "typeorm"
 import { invoiceController } from "./controllers/invoiceController";
 
 dotenv.config();
@@ -21,6 +22,10 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Listening on port ${PORT}`);
+  const dbConnection = await createConnection();
+  const invoiceRepo = dbConnection.getRepository('invoice');
+  const invocies = await invoiceRepo.find();
+  console.log('invoice count', invocies);
 });

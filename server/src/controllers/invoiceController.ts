@@ -9,7 +9,7 @@ invoiceController.get("/", (req: Request, res: Response) => {
   try {
     const invoices = service.findAll();
     res.status(200).send(invoices);
-  } catch (e) {
+  } catch (e: any) {
     res.status(500).send(e.message);
   }
 });
