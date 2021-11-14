@@ -9,8 +9,8 @@ namespace Paid.Database.Repositories
     public interface IInvoiceRepository
     {
         Invoice[] GetInvoices();
-        Invoice[] GetInvoices(InvoiceQueryParameter queryParams);
-        Invoice GetInvoiceById(int id);
+        Task<InvoiceListModel[]> GetInvoices(InvoiceQueryParameter queryParams);
+        Task<Invoice> GetInvoiceById(int id);
         Task<Invoice> AddInvoice(InvoiceModel invoice);
-    }
+  }
 }

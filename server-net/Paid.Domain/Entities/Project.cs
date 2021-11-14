@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -20,6 +21,7 @@ namespace Paid.Domain.Entities
         public DateTime? LogicallyDeletedDate { get; set; }
         public int? Rate { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

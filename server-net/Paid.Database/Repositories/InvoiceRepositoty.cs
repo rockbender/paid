@@ -6,6 +6,7 @@ using Paid.Domain.Models;
 using AutoMapper;
 using Paid.Implementation.QueryParameters;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Paid.Database.Repositories
 {
@@ -30,9 +31,13 @@ namespace Paid.Database.Repositories
             return newInvoice;
         }
 
-        public Invoice GetInvoiceById(int id)
+        public async Task<Invoice> GetInvoiceById(int id)
         {
-            return _dbContext.Invoices.SingleOrDefault(x => x.Id == id);
+            // Eager Load the related data
+            return await _dbContext.Invoices
+            .Include(x => x.WorkItems)
+            .Include(x => x.Project)
+            .SingleOrDefaultAsync(x => x.Id == id);
         }
 
         public Invoice[] GetInvoices()
@@ -40,22 +45,30 @@ namespace Paid.Database.Repositories
             return _dbContext.Invoices.ToArray();
         }
 
-        public Invoice[] GetInvoices(InvoiceQueryParameter queryParams)
+        public async Task<InvoiceListModel[]> GetInvoices(InvoiceQueryParameter queryParams)
         {
-            var invoices = _dbContext.Invoices.AsQueryable();
+            var invoicesQuery = _dbContext.Invoices
+                .Include(x => x.Project)
+                .Include(x => x.WorkItems)
+                .AsQueryable()
+                ;
 
             if (queryParams.IsPaid.HasValue)
             {
-                invoices = invoices.Where(x => x.IsPaid == queryParams.IsPaid.Value);
+                invoicesQuery = invoicesQuery.Where(x => x.IsPaid == queryParams.IsPaid.Value);
             }
             if (queryParams.DueDate.HasValue)
             {
-                invoices = invoices.Where(x => x.DueDate >= queryParams.DueDate.Value);
+                invoicesQuery = invoicesQuery.Where(x => x.DueDate >= queryParams.DueDate.Value);
             }
 
-            return invoices
-                .OrderBy(x => x.CreatedDate)
+            var invoices = invoicesQuery.ToList();
+
+            var result = _mapper.Map<InvoiceListModel[]>(invoices);
+
+            return result
+                .OrderByDescending(x => x.DueDate)
                 .ToArray();
         }
-    }
+  }
 }

@@ -5,6 +5,8 @@ using Paid.Domain.Entities;
 using Paid.Domain.Models;
 using Paid.Database.Repositories;
 using Paid.Implementation.QueryParameters;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace Paid.Api.Controllers
 {
@@ -22,16 +24,18 @@ namespace Paid.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IAsyncEnumerable<Invoice>[]> GetInvoices([FromQuery] InvoiceQueryParameter queryParams)
+        [ProducesResponseType(typeof(InvoiceListModel[]), StatusCodes.Status200OK)]
+        public async Task<ActionResult<InvoiceListModel[]>> GetInvoicesAsync([FromQuery] InvoiceQueryParameter queryParams)
         {
-            return new JsonResult(_invoiceRepo.GetInvoices(queryParams));
+            var result = await _invoiceRepo.GetInvoices(queryParams);
+            return result;
         }
 
-
         [HttpGet("{id}", Name = "GetInvoice")]
-        public ActionResult<Invoice> GetInvoiceById(int id)
+        [ProducesResponseType(typeof(Invoice), StatusCodes.Status200OK)]
+        public async Task<ActionResult<Invoice>> GetInvoiceByIdAsync(int id)
         {
-            var result = _invoiceRepo.GetInvoiceById(id);
+            var result = await _invoiceRepo.GetInvoiceById(id);
 
             if (result == null)
             {
@@ -42,7 +46,8 @@ namespace Paid.Api.Controllers
         }
 
         [HttpPost]
-        public async System.Threading.Tasks.Task<ActionResult<Invoice>> AddInvoiceAsync(InvoiceModel invoice)
+        [ProducesResponseType(typeof(Invoice), StatusCodes.Status200OK)]
+        public async Task<ActionResult<Invoice>> AddInvoiceAsync(InvoiceModel invoice)
         {
             var newInvoice = await _invoiceRepo.AddInvoice(invoice);
             return CreatedAtRoute("GetInvoice", new { id = newInvoice.Id }, newInvoice);

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Invoice } from 'src/app/models/Invoice';
+import { InvoiceListModel } from 'src/app/models/InvoiceListModel';
 import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 })
 export class InvoiceListComponent implements OnInit {
 
-  invoices: Invoice[] = [];
+  invoices: InvoiceListModel[] = [];
 
   constructor(private invoiceService: InvoiceService) { }
 

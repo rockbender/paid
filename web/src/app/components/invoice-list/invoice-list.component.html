@@ -11,9 +11,9 @@
     </thead>
     <tbody>
       <tr *ngFor="let invoice of invoices">
-        <td><a [routerLink]="['/invoice', invoice.invoiceNumber]">{{invoice.invoiceNumber}}</a></td>
+        <td><a [routerLink]="['/invoice', invoice.invoiceId]">{{invoice.invoiceId}}</a></td>
         <td>{{invoice.projectName}}</td>
-        <td>{{invoice.amount}}</td>
+        <td>{{invoice.totalAmount}}</td>
         <td>{{invoice.dueDate}}</td>
         <td>
           <i class="fas fa-check" *ngIf="invoice.isPaid"></i>

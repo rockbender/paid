@@ -101,12 +101,11 @@ namespace Paid.Database.DbContexts
                 entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
 
                 //Causing circular dependency
-                //entity
-                    //.HasOne(d => d.Invoice)
-                    //.WithMany(p => p.WorkItems)
-                    //.HasForeignKey(d => d.InvoiceId)
-                    //.OnDelete(DeleteBehavior.ClientSetNull)
-                    //.HasConstraintName("invoice_work_item");
+                entity.HasOne(d => d.Invoice)
+                    .WithMany(p => p.WorkItems)
+                    .HasForeignKey(d => d.InvoiceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("invoice_work_item");
             });
 
             OnModelCreatingPartial(modelBuilder);
