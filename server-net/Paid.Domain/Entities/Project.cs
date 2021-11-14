@@ -20,8 +20,6 @@ namespace Paid.Domain.Entities
         public bool IsActive { get; set; }
         public DateTime? LogicallyDeletedDate { get; set; }
         public int? Rate { get; set; }
-
-        [JsonIgnore]
         public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

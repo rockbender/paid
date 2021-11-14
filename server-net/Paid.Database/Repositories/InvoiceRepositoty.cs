@@ -62,7 +62,7 @@ namespace Paid.Database.Repositories
                 invoicesQuery = invoicesQuery.Where(x => x.DueDate >= queryParams.DueDate.Value);
             }
 
-            var invoices = invoicesQuery.ToList();
+            var invoices = await invoicesQuery.ToArrayAsync();
 
             var result = _mapper.Map<InvoiceListModel[]>(invoices);
 

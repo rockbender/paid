@@ -18,7 +18,7 @@ namespace Paid.AppServices.Profiles
                 .ForMember(dest => dest.ProjectName, opts => opts.MapFrom(src => src.Project.Name))
                 .ForMember(dest => dest.InvoiceId, opts => opts.MapFrom(src => src.Id))
                 .ForMember(dest => dest.DueDate, opts => opts.MapFrom(src => src.DueDate.Date))
-                .ForMember(dest => dest.TotalAmount, opts => opts.MapFrom(src => GetTotal(src.WorkItems, src.Project.Rate)));
+                .ForMember(dest => dest.TotalAmount, opts => opts.MapFrom(src => GetTotalAmount(src.WorkItems, src.Project.Rate)));
 
             CreateMap<WorkItemModel, WorkItem>()
                 .ReverseMap()
@@ -38,7 +38,7 @@ namespace Paid.AppServices.Profiles
             ;
         }
 
-        private double GetTotal(ICollection<WorkItem> workItems, int? rate)
+        private double GetTotalAmount(ICollection<WorkItem> workItems, int? rate)
         {
             if(!rate.HasValue)
             {
@@ -49,7 +49,7 @@ namespace Paid.AppServices.Profiles
 
             foreach(var w in workItems)
             {
-                total += w.Duration * rate.Value;
+                total += ((double)w.DurationMins / 60d) * ((double)rate.Value / 100.0d);
             }
 
             return total;
