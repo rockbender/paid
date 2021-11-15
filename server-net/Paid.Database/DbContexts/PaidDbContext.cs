@@ -6,7 +6,7 @@ using Paid.Domain.Entities;
 namespace Paid.Database.DbContexts
 {
     public partial class PaidDbContext : DbContext
-    {
+        {
         public PaidDbContext()
         {
         }
@@ -59,6 +59,22 @@ namespace Paid.Database.DbContexts
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.AddressLine1)
+                    .HasMaxLength(255)
+                    .HasColumnName("address_line1");
+
+                entity.Property(e => e.AddressLine2)
+                    .HasMaxLength(255)
+                    .HasColumnName("address line2");
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(255)
+                    .HasColumnName("city");
+
+                entity.Property(e => e.Country)
+                    .HasMaxLength(255)
+                    .HasColumnName("country");
+
                 entity.Property(e => e.CreatedDate)
                     .HasColumnName("created_date")
                     .HasDefaultValueSql("now()");
@@ -79,7 +95,15 @@ namespace Paid.Database.DbContexts
                     .HasMaxLength(255)
                     .HasColumnName("name");
 
-                entity.Property(e => e.Rate).HasColumnName("rate");
+                entity.Property(e => e.PostalCode)
+                    .HasMaxLength(255)
+                    .HasColumnName("postal_code");
+
+                entity.Property(e => e.Province)
+                    .HasMaxLength(255)
+                    .HasColumnName("province");
+
+                entity.Property(e => e.RateCents).HasColumnName("rateCents");
             });
 
             modelBuilder.Entity<WorkItem>(entity =>
@@ -96,11 +120,10 @@ namespace Paid.Database.DbContexts
                     .HasMaxLength(255)
                     .HasColumnName("description");
 
-                entity.Property(e => e.DurationMins).HasColumnName("duration");
+                entity.Property(e => e.DurationMins).HasColumnName("duration_mins");
 
                 entity.Property(e => e.InvoiceId).HasColumnName("invoice_id");
 
-                //Causing circular dependency
                 entity.HasOne(d => d.Invoice)
                     .WithMany(p => p.WorkItems)
                     .HasForeignKey(d => d.InvoiceId)

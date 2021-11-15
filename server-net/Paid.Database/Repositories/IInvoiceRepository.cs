@@ -10,7 +10,7 @@ namespace Paid.Database.Repositories
     {
         Invoice[] GetInvoices();
         Task<InvoiceListModel[]> GetInvoices(InvoiceQueryParameter queryParams);
-        Task<Invoice> GetInvoiceById(int id);
+        Task<InvoiceDetailModel> GetInvoiceById(int id);
         Task<Invoice> AddInvoice(InvoiceModel invoice);
   }
 }

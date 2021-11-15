@@ -31,13 +31,15 @@ namespace Paid.Database.Repositories
             return newInvoice;
         }
 
-        public async Task<Invoice> GetInvoiceById(int id)
+        public async Task<InvoiceDetailModel> GetInvoiceById(int id)
         {
             // Eager Load the related data
-            return await _dbContext.Invoices
+            var invoice = await _dbContext.Invoices
             .Include(x => x.WorkItems)
             .Include(x => x.Project)
             .SingleOrDefaultAsync(x => x.Id == id);
+
+            return _mapper.Map<InvoiceDetailModel>(invoice);
         }
 
         public Invoice[] GetInvoices()

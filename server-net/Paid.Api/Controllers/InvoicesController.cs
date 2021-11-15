@@ -32,8 +32,8 @@ namespace Paid.Api.Controllers
         }
 
         [HttpGet("{id}", Name = "GetInvoice")]
-        [ProducesResponseType(typeof(Invoice), StatusCodes.Status200OK)]
-        public async Task<ActionResult<Invoice>> GetInvoiceByIdAsync(int id)
+        [ProducesResponseType(typeof(InvoiceDetailModel), StatusCodes.Status200OK)]
+        public async Task<ActionResult<InvoiceDetailModel>> GetInvoiceByIdAsync(int id)
         {
             var result = await _invoiceRepo.GetInvoiceById(id);
 

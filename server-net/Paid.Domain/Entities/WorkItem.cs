@@ -13,6 +13,7 @@ namespace Paid.Domain.Entities
         public int InvoiceId { get; set; }
         public int DurationMins { get; set; }
         public string Description { get; set; }
+        [JsonIgnore]
         public virtual Invoice Invoice { get; set; }
-  }
+    }
 }
