@@ -7,6 +7,7 @@ using Paid.Database.Repositories;
 using Paid.Implementation.QueryParameters;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 namespace Paid.Api.Controllers
 {
@@ -27,6 +28,7 @@ namespace Paid.Api.Controllers
         [ProducesResponseType(typeof(InvoiceListModel[]), StatusCodes.Status200OK)]
         public async Task<ActionResult<InvoiceListModel[]>> GetInvoicesAsync([FromQuery] InvoiceQueryParameter queryParams)
         {
+            System.Console.WriteLine(JsonSerializer.Serialize(queryParams));
             var result = await _invoiceRepo.GetInvoices(queryParams);
             return result;
         }

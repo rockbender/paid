@@ -63,6 +63,10 @@ namespace Paid.Database.Repositories
             {
                 invoicesQuery = invoicesQuery.Where(x => x.DueDate >= queryParams.DueDate.Value);
             }
+            if (queryParams.ProjectIds?.Length > 0)
+            {
+                invoicesQuery = invoicesQuery.Where(x => queryParams.ProjectIds.Contains(x.ProjectId));
+            }
 
             var invoices = await invoicesQuery.ToArrayAsync();
 

@@ -5,5 +5,6 @@ namespace Paid.Implementation.QueryParameters
     {
         public bool? IsPaid { get; set; }
         public DateTime? DueDate { get; set; }
+        public int[] ProjectIds { get; set; }
     }
 }
