@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Invoice } from '../models/Invoice';
 import { environment as env} from 'src/environments/environment';
 import { InvoiceListModel } from '../models/InvoiceListModel';
+import { InvoiceDetailModel } from '../models/InvoiceDetailModel';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,13 @@ export class InvoiceService {
   constructor(private http: HttpClient) { }
 
   getInvoices(): Observable<InvoiceListModel[]> {
-    return this.http.get<InvoiceListModel[]>( `${env.apiUrl}/invoices`);
+    return this.http.get<InvoiceListModel[]>(`${env.apiUrl}/invoices`);
   }
 
-  getInvoice(invoiceNumber: number): Invoice | null {
-    const result = this.invoices.filter(x => x.invoiceNumber == invoiceNumber);
-    return result.length == 1 ? result[0] : null;
+  getInvoice(invoiceNumber: number): Observable<InvoiceDetailModel> {
+    return this.http.get<InvoiceDetailModel>(`${env.apiUrl}/invoices/${invoiceNumber}`);
+    // const result = this.invoices.filter(x => x.invoiceNumber == invoiceNumber);
+    // return result.length == 1 ? result[0] : null;
   }
 
   addInvoice(invoice: Invoice): void {
