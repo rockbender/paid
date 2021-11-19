@@ -29,7 +29,7 @@ namespace Paid.Api.Controllers
         public async Task<ActionResult<InvoiceListModel[]>> GetInvoicesAsync([FromQuery] InvoiceQueryParameter queryParams)
         {
             System.Console.WriteLine(JsonSerializer.Serialize(queryParams));
-            var result = await _invoiceRepo.GetInvoices(queryParams);
+            var result = await _invoiceRepo.GetInvoicesAsync(queryParams);
             return result;
         }
 
@@ -37,7 +37,7 @@ namespace Paid.Api.Controllers
         [ProducesResponseType(typeof(InvoiceDetailModel), StatusCodes.Status200OK)]
         public async Task<ActionResult<InvoiceDetailModel>> GetInvoiceByIdAsync(int id)
         {
-            var result = await _invoiceRepo.GetInvoiceById(id);
+            var result = await _invoiceRepo.GetInvoiceByIdAsync(id);
 
             if (result == null)
             {
@@ -51,7 +51,7 @@ namespace Paid.Api.Controllers
         [ProducesResponseType(typeof(Invoice), StatusCodes.Status200OK)]
         public async Task<ActionResult<Invoice>> AddInvoiceAsync(InvoiceModel invoice)
         {
-            var newInvoice = await _invoiceRepo.AddInvoice(invoice);
+            var newInvoice = await _invoiceRepo.AddInvoiceAsync(invoice);
             return CreatedAtRoute("GetInvoice", new { id = newInvoice.Id }, newInvoice);
         }
     }

@@ -21,7 +21,7 @@ namespace Paid.Database.Repositories
             _mapper = mapper;
         }
 
-        public async Task<Invoice> AddInvoice(InvoiceModel invoice)
+        public async Task<Invoice> AddInvoiceAsync(InvoiceModel invoice)
         {
             var newInvoice = _mapper.Map<Invoice>(invoice);
 
@@ -31,7 +31,7 @@ namespace Paid.Database.Repositories
             return newInvoice;
         }
 
-        public async Task<InvoiceDetailModel> GetInvoiceById(int id)
+        public async Task<InvoiceDetailModel> GetInvoiceByIdAsync(int id)
         {
             // Eager Load the related data
             var invoice = await _dbContext.Invoices
@@ -42,12 +42,12 @@ namespace Paid.Database.Repositories
             return _mapper.Map<InvoiceDetailModel>(invoice);
         }
 
-        public Invoice[] GetInvoices()
+        public async Task<Invoice[]> GetInvoicesAsync()
         {
-            return _dbContext.Invoices.ToArray();
+            return await _dbContext.Invoices.ToArrayAsync();
         }
 
-        public async Task<InvoiceListModel[]> GetInvoices(InvoiceQueryParameter queryParams)
+        public async Task<InvoiceListModel[]> GetInvoicesAsync(InvoiceQueryParameter queryParams)
         {
             var invoicesQuery = _dbContext.Invoices
                 .Include(x => x.Project)
