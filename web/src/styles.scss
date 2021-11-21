@@ -3,24 +3,23 @@
 // @import "~font-awesome/css/font-awesome.min.css";
 // @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
 // @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 //OFFLINE
-@import url('libs/bootstrap.min.css');
-@import url('libs/font-awesome5/css/fontawesome-all.min.css');
+@import url("libs/bootstrap.min.css");
+@import url("libs/font-awesome5/css/fontawesome-all.min.css");
 
-@media print
-{
-  .no-print, .no-print *
-  {
+@media print {
+  .no-print,
+  .no-print * {
     display: none !important;
   }
 }
 
 body {
   // font-family: 'Montserrat', sans-serif;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   overflow-y: auto;
 }
 

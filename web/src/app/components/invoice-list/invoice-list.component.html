@@ -11,16 +11,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let invoice of invoices">
-        <td><a [routerLink]="['/invoice', invoice.invoiceId]">{{invoice.invoiceId}}</a></td>
-        <td>{{invoice.projectName}}</td>
-        <td>{{invoice.totalAmount}}</td>
-        <td>{{invoice.dueDate}}</td>
+        <td>
+          <a [routerLink]="['/invoice', invoice.invoiceId]">{{
+            invoice.invoiceId
+          }}</a>
+        </td>
+        <td>{{ invoice.projectName }}</td>
+        <td>{{ invoice.totalAmount }}</td>
+        <td>{{ invoice.dueDate }}</td>
         <td>
           <i class="fas fa-check" *ngIf="invoice.isPaid"></i>
           <i class="fas fa-times" *ngIf="!invoice.isPaid"></i>
         </td>
       </tr>
     </tbody>
-    
   </table>
 </div>

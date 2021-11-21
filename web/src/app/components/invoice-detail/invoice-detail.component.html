@@ -1,12 +1,12 @@
 <div class="row text-center">
-  <div *ngIf="invoice === null" class="col-md-12">
-    Invoice not found
-  </div>
+  <div *ngIf="invoice === null" class="col-md-12">Invoice not found</div>
 </div>
 <div class="container invoice-font" id="invoice-preview" *ngIf="invoice">
   <div class="row text-right">
     <div class="col-md-12">
-      <div class="btn btn-outline-primary no-print" (click)="printPDF()">Print</div>
+      <div class="btn btn-outline-primary no-print" (click)="printPDF()">
+        Print
+      </div>
     </div>
   </div>
   <div class="row">
@@ -23,83 +23,60 @@
           <div class="mt-3">Bill To</div>
         </div>
         <div class="col-md-6 text-left">
-          <div>{{invoice.invoiceId}}</div>
-          <div>{{invoice.invoiceDate}}</div>
-          <div class="mt-3 due-date-cell">{{invoice.dueDate}}</div>
+          <div>{{ invoice.invoiceId }}</div>
+          <div>{{ invoice.invoiceDate }}</div>
+          <div class="mt-3 due-date-cell">{{ invoice.dueDate }}</div>
           <div class="mt-2" style="white-space: pre-line">
-            {{billingAddress}}</div>
+            {{ billingAddress }}
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="row mt-5 text-center">
-    <div class="col-md-6">
-      Description
-    </div>
-    <div class="col-md-2">
-      Hours
-    </div>
-    <div class="col-md-2">
-      Rate
-    </div>
-    <div class="col-md-2">
-      Amount
-    </div>
+    <div class="col-md-6">Description</div>
+    <div class="col-md-2">Hours</div>
+    <div class="col-md-2">Rate</div>
+    <div class="col-md-2">Amount</div>
   </div>
   <div class="row text-right" *ngFor="let wi of workItems">
     <div class="col-md-6 text-left work-item-cell">
-      {{wi.description}}
+      {{ wi.description }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{wi.durationMins > 0 ? wi.durationMins / 60: ""}}
+      {{ wi.durationMins > 0 ? wi.durationMins / 60 : "" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{wi.durationMins > 0 ? 80: ""}}
+      {{ wi.durationMins > 0 ? 80 : "" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{wi.durationMins > 0 ? wi.durationMins / 60 * 80: ""}}
+      {{ wi.durationMins > 0 ? (wi.durationMins / 60) * 80 : "" }}
     </div>
   </div>
   <div class="row text-right">
-    <div class="col-md-6 work-item-cell-nocolor text-right">
-      Total Hours
-    </div>
+    <div class="col-md-6 work-item-cell-nocolor text-right">Total Hours</div>
     <div class="col-md-2 work-item-cell">
-      {{totalHours}}
+      {{ totalHours }}
     </div>
-    <div class="col-md-2">
-      Subtotal
-    </div>
+    <div class="col-md-2">Subtotal</div>
     <div class="col-md-2 work-item-cell">
-      {{subTotal}}
+      {{ subTotal }}
     </div>
   </div>
   <div class="row text-right">
-    <div class="col-md-6 work-item-cell-nocolor text-right">
-
-    </div>
-    <div class="col-md-2">
-      
-    </div>
-    <div class="col-md-2">
-      GST (5%)
-    </div>
+    <div class="col-md-6 work-item-cell-nocolor text-right"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">GST (5%)</div>
     <div class="col-md-2 work-item-cell">
-      {{gst}}
+      {{ gst }}
     </div>
   </div>
   <div class="row text-right">
-    <div class="col-md-6 work-item-cell-nocolor text-right">
-      
-    </div>
-    <div class="col-md-2">
-      
-    </div>
-    <div class="col-md-2">
-      Total
-    </div>
+    <div class="col-md-6 work-item-cell-nocolor text-right"></div>
+    <div class="col-md-2"></div>
+    <div class="col-md-2">Total</div>
     <div class="col-md-2 work-item-cell">
-      {{grandTotal}}
+      {{ grandTotal }}
     </div>
   </div>
   <div class="row mt-5 text-center invoice-subfooter">
