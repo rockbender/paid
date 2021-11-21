@@ -24,8 +24,8 @@
         </div>
         <div class="col-md-6 text-left">
           <div>{{ invoice.invoiceId }}</div>
-          <div>{{ invoice.invoiceDate }}</div>
-          <div class="mt-3 due-date-cell">{{ invoice.dueDate }}</div>
+          <div>{{ invoice.invoiceDate | date }}</div>
+          <div class="mt-3 due-date-cell">{{ invoice.dueDate | date }}</div>
           <div class="mt-2" style="white-space: pre-line">
             {{ billingAddress }}
           </div>
@@ -44,13 +44,13 @@
       {{ wi.description }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ wi.durationMins > 0 ? wi.durationMins / 60 : "" }}
+      {{ (wi.durationMins > 0 ? wi.durationMins / 60 : "") | number: "1.2-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ wi.durationMins > 0 ? 80 : "" }}
+      {{ (wi.durationMins > 0 ? 80 : "") | number: "1.02-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ wi.durationMins > 0 ? (wi.durationMins / 60) * 80 : "" }}
+      {{ (wi.durationMins > 0 ? (wi.durationMins / 60) * 80 : "") | currency }}
     </div>
   </div>
   <div class="row text-right">
@@ -60,7 +60,7 @@
     </div>
     <div class="col-md-2">Subtotal</div>
     <div class="col-md-2 work-item-cell">
-      {{ subTotal }}
+      {{ subTotal | currency }}
     </div>
   </div>
   <div class="row text-right">
@@ -68,7 +68,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-2">GST (5%)</div>
     <div class="col-md-2 work-item-cell">
-      {{ gst }}
+      {{ gst | currency }}
     </div>
   </div>
   <div class="row text-right">
@@ -76,7 +76,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-2">Total</div>
     <div class="col-md-2 work-item-cell">
-      {{ grandTotal }}
+      {{ grandTotal | currency }}
     </div>
   </div>
   <div class="row mt-5 text-center invoice-subfooter">
