@@ -1,3 +1,4 @@
+import { preserveWhitespacesDefault } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Invoice, WorkItem } from 'src/app/models/Invoice';
@@ -18,19 +19,28 @@ export class InvoiceDetailComponent implements OnInit {
   readonly GST_RATE: number = 5;
 
   invoice!: InvoiceDetailModel | null;
-  totalHours: number = 0;
 
   get workItems(): WorkItemModel[] {
     let items = Array<WorkItemModel>(this.TOTAL_ROWS);
 
+    // TODO Rishi - use index based loop to assign values to each
+    // item in the grid array which is initiall empty
     this.invoice?.workItems.forEach((wi, i) => {
-      this.totalHours += wi.durationMins;
       items[i] = wi;
     });
 
     return items;
   }
 
+  get totalHours() {
+    let total = 0.0;
+
+    this.invoice?.workItems.forEach((wi) => {
+      total += wi.durationMins / 60;
+    });
+
+    return total;
+  }
   get subTotal() {
     return this.RATE * this.totalHours;
   }

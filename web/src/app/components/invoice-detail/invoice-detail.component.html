@@ -41,13 +41,13 @@
   </div>
   <div class="row text-right" *ngFor="let wi of workItems">
     <div class="col-md-6 text-left work-item-cell">
-      {{ wi.description }}
+      {{ wi?.description }}
     </div>
     <div class="col-md-2 work-item-cell">
       {{ (wi.durationMins > 0 ? wi.durationMins / 60 : "") | number: "1.2-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ (wi.durationMins > 0 ? 80 : "") | number: "1.02-2" }}
+      {{ (wi.durationMins > 0 ? 80 : "") | number: "1.0-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
       {{ (wi.durationMins > 0 ? (wi.durationMins / 60) * 80 : "") | currency }}
@@ -56,7 +56,7 @@
   <div class="row text-right">
     <div class="col-md-6 work-item-cell-nocolor text-right">Total Hours</div>
     <div class="col-md-2 work-item-cell">
-      {{ totalHours }}
+      {{ totalHours | number: "1.2-2" }}
     </div>
     <div class="col-md-2">Subtotal</div>
     <div class="col-md-2 work-item-cell">
