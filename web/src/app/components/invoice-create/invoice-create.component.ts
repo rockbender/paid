@@ -9,8 +9,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Invoice, WorkItem } from 'src/app/models/Invoice';
+import {
+  Invoice,
+  InvoiceModel,
+  WorkItem,
+  WorkItemModel,
+} from 'src/app/models/Invoice';
+import { ProjectModel } from 'src/app/models/InvoiceDetailModel';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
   selector: 'app-invoice-create',
@@ -22,6 +29,7 @@ export class InvoiceCreateComponent implements OnInit {
   invoiceForm!: FormGroup;
   periodValidationMessage!: string;
   changesSaved: boolean = false;
+  projects: ProjectModel[] = [];
 
   private validationMessages = {
     period: {
@@ -49,7 +57,8 @@ export class InvoiceCreateComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private projectService: ProjectService
   ) {}
 
   ngOnInit(): void {
@@ -71,6 +80,11 @@ export class InvoiceCreateComponent implements OnInit {
       ]) as FormArray,
     });
 
+    this.projectService.getProjects().subscribe((r) => {
+      this.projects = r;
+      console.log('projects', this.projects);
+    });
+
     this.invoiceForm
       .get('hasInvoicePeriod')
       ?.valueChanges.subscribe((value) => this.onHasInvoicePeriod(value));
@@ -78,6 +92,11 @@ export class InvoiceCreateComponent implements OnInit {
     this.invoicePeriodC?.valueChanges.subscribe((value) =>
       this.setValidationMessage(this.invoicePeriodC!)
     );
+  }
+
+  ngAfterViewInit(): void {
+    console.log('ngAfterInit');
+    console.log('projects', this.projects);
   }
 
   buildWorkItem(): FormGroup {
@@ -98,13 +117,13 @@ export class InvoiceCreateComponent implements OnInit {
     return total * this.rate;
   }
 
-  getWorkItems(): WorkItem[] {
-    let workItems: WorkItem[] = [];
+  getWorkItems(): WorkItemModel[] {
+    let workItems: WorkItemModel[] = [];
     this.workItems.controls.forEach((x) =>
       workItems.push({
         description: x.value.desc,
-        hours: x.value.hours,
-      } as WorkItem)
+        durationMins: x.value.hours * 60,
+      } as WorkItemModel)
     );
 
     return workItems;
@@ -120,16 +139,17 @@ export class InvoiceCreateComponent implements OnInit {
     }
 
     const values = this.invoiceForm.value;
-    const invoiceToAdd: Invoice = {
-      amount: this.getInvoiceTotal(),
-      creationDate: new Date().toISOString().split('T')[0],
+    const invoiceToAdd: InvoiceModel = {
+      projectId: values.selectedProject,
+      invoiceDate: new Date().toISOString().split('T')[0],
       dueDate: values.dueDate,
-      invoiceNumber: 0,
       isPaid: false,
-      projectId: 1,
-      projectName: values.selectedProject,
       workItems: this.getWorkItems(),
+      periodStartDate: values.period.startDate,
+      periodEndDate: values.period.endDate,
     };
+
+    console.log(invoiceToAdd);
 
     this.invoiceService.addInvoice(invoiceToAdd);
     this.changesSaved = true;

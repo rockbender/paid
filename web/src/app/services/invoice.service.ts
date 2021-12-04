@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Invoice } from '../models/Invoice';
+import { Invoice, InvoiceModel } from '../models/Invoice';
 import { environment as env } from 'src/environments/environment';
 import { InvoiceListModel } from '../models/InvoiceListModel';
 import { InvoiceDetailModel } from '../models/InvoiceDetailModel';
@@ -26,8 +26,9 @@ export class InvoiceService {
     // return result.length == 1 ? result[0] : null;
   }
 
-  addInvoice(invoice: Invoice): void {
-    invoice.invoiceNumber = ++this.lastId;
-    this.invoices.push(invoice);
+  addInvoice(invoice: InvoiceModel): void {
+    this.http
+      .post<InvoiceModel>(`${env.apiUrl}/invoices`, invoice)
+      .subscribe((r) => console.log('invoice submitted'));
   }
 }

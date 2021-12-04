@@ -24,9 +24,9 @@ namespace Paid.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<Project[]> GetProjects()
+        public async Task<ActionResult<Project[]>> GetProjectsAsync()
         {
-            return new JsonResult(_projectRepo.GetProjectsAsync());
+            return new JsonResult(await _projectRepo.GetProjectsAsync());
         }
 
         [HttpGet("{id}")]

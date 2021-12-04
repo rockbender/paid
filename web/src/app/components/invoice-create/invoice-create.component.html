@@ -9,15 +9,16 @@
       <form [formGroup]="invoiceForm">
         <div class="form-group">
           <label for="project">Project</label>
-          <input
-            type="text"
-            class="form-control"
-            id="projectSelection"
+          <select
+            class="form-control dropdown"
+            id="type"
+            data-live-search="true"
             formControlName="selectedProject"
-            aria-describedby="projectError"
-            placeholder="Select Project"
-          />
-          <!-- <small id="projectError" class="form-text text-muted">Select a project</small> -->
+          >
+            <option *ngFor="let proj of projects" [value]="proj.id">
+              {{ proj.name }}
+            </option>
+          </select>
         </div>
         <div class="form-group">
           <label for="project">Due Date</label>

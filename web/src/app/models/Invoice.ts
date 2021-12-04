@@ -13,3 +13,18 @@ export interface WorkItem {
   description: string;
   hours: number;
 }
+
+export interface InvoiceModel {
+  projectId: number;
+  invoiceDate: string;
+  dueDate: string;
+  isPaid: boolean;
+  periodStartDate: string;
+  periodEndDate: string;
+  workItems: WorkItemModel[];
+}
+
+export interface WorkItemModel {
+  description: string;
+  durationMins: number;
+}
