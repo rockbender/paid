@@ -6,7 +6,9 @@ import {
   InvoiceDetailModel,
   WorkItemModel,
 } from 'src/app/models/InvoiceDetailModel';
+import { userSetting } from 'src/app/models/userSetting';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { UserSettingsService } from 'src/app/services/user-settings.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -14,9 +16,11 @@ import { InvoiceService } from 'src/app/services/invoice.service';
   styleUrls: ['./invoice-detail.component.scss'],
 })
 export class InvoiceDetailComponent implements OnInit {
-  readonly TOTAL_ROWS: number = 7; // ToDO Rishi - get this from settings
+  readonly TOTAL_ROWS: number = 12; // ToDO Rishi - get this from settings
   readonly RATE: number = 80; // TODO Rishi - Get this from projectService
   readonly GST_RATE: number = 5;
+
+  userSetting!: userSetting;
 
   invoice!: InvoiceDetailModel | null;
 
@@ -61,10 +65,13 @@ export class InvoiceDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private invoiceService: InvoiceService
+    private invoiceService: InvoiceService,
+    private userSettingService: UserSettingsService
   ) {}
 
   ngOnInit(): void {
+    this.userSetting = this.userSettingService.getUserSettings();
+
     const invoiceNumber = Number(this.route.snapshot.paramMap.get('id'));
     this.invoiceService
       .getInvoice(invoiceNumber)

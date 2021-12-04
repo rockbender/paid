@@ -11,13 +11,15 @@
   </div>
   <div class="row">
     <div class="col-md-6">
-      <div class="h1 text-warning">ENTEMPLE</div>
+      <!-- TODO: Get Logo from project info from API -->
+      <!-- TODO: Keep logo in the db -->
+      <img src="../../../assets/entemple-logo.png" width="350" alt="sdf" />
     </div>
     <div class="col-md-6 text-right">
       <div class="h1 mb-5">INVOICE</div>
       <div class="row">
         <div class="col-md-6">
-          <div>Invoice Number</div>
+          <div>Invoice#</div>
           <div>Date</div>
           <div class="mt-3">Due Date</div>
           <div class="mt-3">Bill To</div>
@@ -44,7 +46,7 @@
       {{ wi?.description }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ (wi.durationMins > 0 ? wi.durationMins / 60 : "") | number: "1.2-2" }}
+      {{ (wi.durationMins > 0 ? wi.durationMins / 60 : "") | number: "1.0-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
       {{ (wi.durationMins > 0 ? 80 : "") | number: "1.0-2" }}
@@ -81,22 +83,25 @@
   </div>
   <div class="row mt-5 text-center invoice-subfooter">
     <div class="col-md-12">
-      <p class="m-0">Make all checks payable to XYZ Inc.</p>
+      <p class="m-0">
+        Make all checks payable to <strong>{{ userSetting.payableTo }}</strong>
+      </p>
       <p class="m-0">Thank you for your business.</p>
     </div>
   </div>
   <div class="row mt-5 text-center invoice-footer">
     <div class="col-md-4">
-      <p class="m-0">123 Main St.</p>
-      <p class="m-0">Vancouver, BC</p>
+      <!-- TODO: Get Address from a property -->
+      <p class="m-0">7462 115A St.</p>
+      <p class="m-0">Delta, BC</p>
     </div>
     <div class="col-md-4">
       <p class="m-0">GST#</p>
-      <p class="m-0">78654 5646 RT001</p>
+      <p class="m-0">{{ userSetting.gstNumber }}</p>
     </div>
     <div class="col-md-4">
-      <p class="m-0">dave.mira@yahoo.com</p>
-      <p class="m-0">778-999-8888</p>
+      <p class="m-0">{{ userSetting.email }}</p>
+      <p class="m-0">{{ userSetting.phone }}</p>
     </div>
   </div>
   <div class="row mt-5"></div>
