@@ -17,17 +17,17 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 
 - [ ] Add Create Invoice Validation in UI
 - [ ] Add Create Invoice validation in API
+- [ ] Time range on invoice creation is optional
 
 ## Release Notes v.0.2 (with-api)
 
-- [ ] Home page loads invoices from db
-- [ ] Created invoice saves to db
+- [x] Home page loads invoices from db
+- [x] Created invoice saves to db
 - [ ] Can add a project
 - [ ] Can view list of projects
-- [ ] Can select a project when creating an invoice with dropdowns
-- [ ] Time range on invoice creation is optional
+- [x] Can select a project when creating an invoice with dropdowns
 - [ ] Hide infobar in all create/detail page
-- [ ] Fix print margins
+- [x] Fix print margins
 
 ## Release Notes v.0.1 (no-api)
 

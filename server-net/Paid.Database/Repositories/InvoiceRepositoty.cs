@@ -73,7 +73,7 @@ namespace Paid.Database.Repositories
             var result = _mapper.Map<InvoiceListModel[]>(invoices);
 
             return result
-                .OrderByDescending(x => x.DueDate)
+                .OrderByDescending(x => x.InvoiceId)
                 .ToArray();
         }
   }

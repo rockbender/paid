@@ -58,7 +58,7 @@ namespace Paid.AppServices.Profiles
                 total += ((double)w.DurationMins / 60d) * ((double)rate.Value / 100.0d);
             }
 
-            return total;
+            return total * 1.05;
         }
     }
 }

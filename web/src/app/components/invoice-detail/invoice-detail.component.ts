@@ -46,7 +46,7 @@ export class InvoiceDetailComponent implements OnInit {
     return total;
   }
   get subTotal() {
-    return this.RATE * this.totalHours;
+    return this.projectRate * this.totalHours;
   }
   get gst() {
     return (this.subTotal * this.GST_RATE) / 100;
@@ -61,6 +61,10 @@ export class InvoiceDetailComponent implements OnInit {
       project?.addressLine2 ? `\n${project.addressLine2}` : ''
     }
      ${project?.city} ${project?.postalCode}`;
+  }
+  get projectRate() {
+    const project = this.invoice?.project;
+    return project?.rateCents == null ? this.RATE : project.rateCents / 100;
   }
 
   constructor(

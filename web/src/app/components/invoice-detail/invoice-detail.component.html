@@ -46,13 +46,19 @@
       {{ wi?.description }}
     </div>
     <div class="col-md-2 work-item-cell">
+      <!--Hours-->
       {{ (wi.durationMins > 0 ? wi.durationMins / 60 : "") | number: "1.0-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ (wi.durationMins > 0 ? 80 : "") | number: "1.0-2" }}
+      <!--Rate-->
+      {{ (wi.durationMins > 0 ? projectRate : "") | number: "1.0-2" }}
     </div>
     <div class="col-md-2 work-item-cell">
-      {{ (wi.durationMins > 0 ? (wi.durationMins / 60) * 80 : "") | currency }}
+      <!--Amount-->
+      {{
+        (wi.durationMins > 0 ? (wi.durationMins / 60) * projectRate : "")
+          | currency
+      }}
     </div>
   </div>
   <div class="row text-right">

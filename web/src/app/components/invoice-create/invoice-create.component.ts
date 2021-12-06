@@ -77,6 +77,12 @@ export class InvoiceCreateComponent implements OnInit {
         this.buildWorkItem(),
         this.buildWorkItem(),
         this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
+        this.buildWorkItem(),
       ]) as FormArray,
     });
 
