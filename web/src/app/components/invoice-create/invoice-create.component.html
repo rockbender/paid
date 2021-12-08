@@ -11,8 +11,6 @@
           <label for="project">Project</label>
           <select
             class="form-control dropdown"
-            id="type"
-            data-live-search="true"
             formControlName="selectedProject"
           >
             <option *ngFor="let proj of projects" [value]="proj.id">

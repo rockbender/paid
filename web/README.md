@@ -13,10 +13,18 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - Track total revenues for different projects
 - Toast Notification
 
+## Release Notes v.0.4
+
+- [ ] Invoice has a custom Sequencer
+- [ ] Project can be edited
+- [ ] User settings (Co logo, address, GST) can be added
+
 ## Release Notes v.0.3
 
 - [ ] Add Create Invoice Validation in UI
 - [ ] Add Create Invoice validation in API
+- [ ] Invoice can be edited
+- [ ] Invoice can be deleted
 - [ ] Time range on invoice creation is optional
 
 ## Release Notes v.0.2 (with-api)
