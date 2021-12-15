@@ -31,7 +31,18 @@ namespace Paid.Database.Repositories
             return newInvoice;
         }
 
-        public async Task<InvoiceDetailModel> GetInvoiceByIdAsync(int id)
+    public async Task DeleteInvoice(int invoiceId)
+    {
+      var existingInvoice = await _dbContext.Invoices.SingleOrDefaultAsync(x => x.Id == invoiceId);
+
+      if(existingInvoice != null)
+      {
+          _dbContext.Invoices.Remove(existingInvoice);
+          await _dbContext.SaveChangesAsync();
+      }
+    }
+
+    public async Task<InvoiceDetailModel> GetInvoiceByIdAsync(int id)
         {
             // Eager Load the related data
             var invoice = await _dbContext.Invoices

@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="h3">Create Invoice</div>
+      <div *ngIf="!inEditMode" class="h3">Create Invoice</div>
+      <div *ngIf="inEditMode" class="h3">Edit Invoice</div>
     </div>
   </div>
   <div class="row">
@@ -85,7 +86,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  formControlName="desc"
+                  formControlName="description"
                 />
                 <input
                   type="text"
@@ -99,7 +100,9 @@
         <div class="btn btn-outline-secondary mr-2" (click)="onCancel()">
           Cancel
         </div>
-        <div class="btn btn-primary" (click)="onCreate()">Create</div>
+        <div class="btn btn-primary" (click)="onCreate()">
+          {{ inEditMode ? "Update" : "Create" }}
+        </div>
         <div class="btn btn-secondary float-right" (click)="onPreview()">
           <i class="fas fa-eye"></i> Preview
         </div>

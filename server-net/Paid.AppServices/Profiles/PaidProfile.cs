@@ -26,6 +26,8 @@ namespace Paid.AppServices.Profiles
                 .ForMember(dest => dest.DueDate, otps => otps.MapFrom(src => src.DueDate))
                 .ForMember(dest => dest.Project, opts => opts.MapFrom(src => src.Project))
                 .ForMember(dest => dest.WorkItems, opts => opts.MapFrom(src => src.WorkItems))
+                .ForMember(dest => dest.PeriodStartDate, opts => opts.MapFrom(src => src.PeriodStartDate))
+                .ForMember(dest => dest.PeriodEndDate, opts => opts.MapFrom(src => src.PeriodEndDate))
             ;
 
             CreateMap<WorkItemModel, WorkItem>()

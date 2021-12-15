@@ -54,5 +54,21 @@ namespace Paid.Api.Controllers
             var newInvoice = await _invoiceRepo.AddInvoiceAsync(invoice);
             return CreatedAtRoute("GetInvoice", new { id = newInvoice.Id }, newInvoice);
         }
+
+        [HttpDelete("{invoiceId}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(404)]
+        public async Task<ActionResult> DeleteInvoice(int invoiceId)
+        {
+            var existingInvoice = await _invoiceRepo.GetInvoiceByIdAsync(invoiceId);
+
+            if(existingInvoice == null)
+            {
+                return NotFound();
+            }
+
+            await _invoiceRepo.DeleteInvoice(invoiceId);
+            return NoContent();
+        }
     }
 }

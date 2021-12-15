@@ -1,6 +1,6 @@
 import { preserveWhitespacesDefault } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice, WorkItem } from 'src/app/models/Invoice';
 import {
   InvoiceDetailModel,
@@ -21,7 +21,7 @@ export class InvoiceDetailComponent implements OnInit {
   readonly GST_RATE: number = 5;
 
   userSetting!: userSetting;
-
+  invoiceNumber!: number;
   invoice!: InvoiceDetailModel | null;
 
   get workItems(): WorkItemModel[] {
@@ -69,6 +69,7 @@ export class InvoiceDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private invoiceService: InvoiceService,
     private userSettingService: UserSettingsService
   ) {}
@@ -76,13 +77,22 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit(): void {
     this.userSetting = this.userSettingService.getUserSettings();
 
-    const invoiceNumber = Number(this.route.snapshot.paramMap.get('id'));
+    this.invoiceNumber = Number(this.route.snapshot.paramMap.get('id'));
     this.invoiceService
-      .getInvoice(invoiceNumber)
+      .getInvoice(this.invoiceNumber)
       .subscribe((r) => (this.invoice = r));
   }
 
   printPDF(): void {
     window.print();
+  }
+
+  editInvoice(): void {
+    this.router.navigate([`edit-invoice/${this.invoice?.invoiceId}`]);
+  }
+
+  deleteInvoice(): void {
+    this.invoiceService.deleteInvoice(this.invoiceNumber);
+    this.router.navigate(['/']);
   }
 }

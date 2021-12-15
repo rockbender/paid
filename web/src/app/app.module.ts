@@ -42,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
         component: InvoiceCreateComponent,
         canDeactivate: [InvoiceCreateGuard],
       },
+      { path: 'edit-invoice/:id', component: InvoiceCreateComponent },
       { path: 'timesheets', component: TimesheetListComponent },
       { path: 'settings', component: SettingsComponent },
     ]),

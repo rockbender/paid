@@ -31,4 +31,8 @@ export class InvoiceService {
       .post<InvoiceModel>(`${env.apiUrl}/invoices`, invoice)
       .subscribe((r) => console.log('invoice submitted'));
   }
+
+  deleteInvoice(invoiceNumber: number): void {
+    this.http.delete(`${env.apiUrl}/invoices/${invoiceNumber}`).subscribe();
+  }
 }

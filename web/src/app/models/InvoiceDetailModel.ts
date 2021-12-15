@@ -1,8 +1,10 @@
 export interface InvoiceDetailModel {
   invoiceId: number;
   invoiceDate: Date;
-  dueDate: Date;
+  dueDate: string;
   project: ProjectModel;
+  periodStartDate: string;
+  periodEndDate: string;
   workItems: WorkItemModel[];
 }
 

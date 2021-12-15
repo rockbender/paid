@@ -3,9 +3,18 @@
 </div>
 <div class="container invoice-font" id="invoice-preview" *ngIf="invoice">
   <div class="row text-right">
-    <div class="col-md-12">
-      <div class="btn btn-outline-primary no-print" (click)="printPDF()">
+    <div class="col-md-12 mb-3">
+      <div
+        class="btn btn-outline-primary no-print mr-2"
+        (click)="editInvoice()"
+      >
+        Edit
+      </div>
+      <div class="btn btn-outline-primary no-print mr-2" (click)="printPDF()">
         Print
+      </div>
+      <div class="btn btn-outline-danger no-print" (click)="deleteInvoice()">
+        Delete
       </div>
     </div>
   </div>
