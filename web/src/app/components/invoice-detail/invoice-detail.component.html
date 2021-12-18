@@ -4,17 +4,14 @@
 <div class="container invoice-font" id="invoice-preview" *ngIf="invoice">
   <div class="row text-right">
     <div class="col-md-12 mb-3">
-      <div
-        class="btn btn-outline-primary no-print mr-2"
-        (click)="editInvoice()"
-      >
-        Edit
+      <div class="btn btn-outline-dark no-print mr-2" (click)="editInvoice()">
+        <i class="fas fa-pen"></i>
       </div>
-      <div class="btn btn-outline-primary no-print mr-2" (click)="printPDF()">
-        Print
+      <div class="btn btn-outline-dark no-print mr-2" (click)="printPDF()">
+        <i class="fas fa-print"></i>
       </div>
       <div class="btn btn-outline-danger no-print" (click)="deleteInvoice()">
-        Delete
+        <i class="fas fa-trash"></i>
       </div>
     </div>
   </div>
