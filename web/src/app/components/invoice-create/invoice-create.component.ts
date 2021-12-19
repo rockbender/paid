@@ -3,18 +3,11 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
-  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  Invoice,
-  InvoiceModel,
-  WorkItem,
-  WorkItemModel,
-} from 'src/app/models/Invoice';
+import { InvoiceModel, WorkItemModel } from 'src/app/models/Invoice';
 import { ProjectModel } from 'src/app/models/InvoiceDetailModel';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { ProjectService } from 'src/app/services/project.service';
@@ -25,12 +18,13 @@ import { ProjectService } from 'src/app/services/project.service';
   styleUrls: ['./invoice-create.component.scss'],
 })
 export class InvoiceCreateComponent implements OnInit {
-  readonly rate: number = 80; // TODO Rishi - Get this from ProjectService;
+  readonly WORK_ITEM_ROWS = 12;
   invoiceForm!: FormGroup;
   periodValidationMessage!: string;
   changesSaved: boolean = false;
   projects: ProjectModel[] = [];
   inEditMode: boolean = false;
+  invoiceNumber: number = 0;
 
   private validationMessages = {
     period: {
@@ -64,10 +58,10 @@ export class InvoiceCreateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const invoiceNumber = Number(this.route.snapshot.paramMap.get('id'));
+    this.invoiceNumber = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.inEditMode = invoiceNumber > 0;
-    console.log('invoiceNumber', invoiceNumber);
+    this.inEditMode = this.invoiceNumber > 0;
+    console.log('invoiceNumber', this.route.snapshot);
 
     this.invoiceForm = this.fb.group({
       selectedProject: ['', Validators.required],
@@ -77,20 +71,7 @@ export class InvoiceCreateComponent implements OnInit {
         startDate: '',
         endDate: '',
       }),
-      workItems: this.fb.array([
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-        this.buildWorkItem(),
-      ]) as FormArray,
+      workItems: this.fb.array(this.createWorkItemRows()) as FormArray,
     });
 
     this.projectService.getProjects().subscribe((r) => {
@@ -98,16 +79,18 @@ export class InvoiceCreateComponent implements OnInit {
     });
 
     if (this.inEditMode) {
-      this.invoiceService.getInvoice(invoiceNumber).subscribe((r) => {
+      this.invoiceService.getInvoice(this.invoiceNumber).subscribe((r) => {
         console.log('invoice', r);
         const patchValue = {
           selectedProject: r.project.id,
           dueDate: r.dueDate.split('T')[0],
+          hasInvoicePeriod: true,
           period: {
-            start: r.periodStartDate.split('T')[0],
-            end: r.periodEndDate.split('T')[0],
+            startDate: r.periodStartDate.split('T')[0],
+            endDate: r.periodEndDate.split('T')[0],
           },
           workItems: r.workItems.map((x) => ({
+            id: x.id,
             description: x.description,
             hours: x.durationMins === 0 ? '' : x.durationMins / 60,
           })),
@@ -125,21 +108,27 @@ export class InvoiceCreateComponent implements OnInit {
     );
   }
 
-  buildWorkItem(): FormGroup {
-    return this.fb.group({
-      description: '',
-      hours: '',
-    });
+  createWorkItemRows(): FormGroup[] {
+    let formGroups: FormGroup[] = [];
+
+    for (let i = 0; i < this.WORK_ITEM_ROWS; i++) {
+      formGroups.push(this.fb.group({ id: 0, description: '', hours: '' }));
+    }
+
+    return formGroups;
   }
 
   getWorkItemModels(): WorkItemModel[] {
     let workItems: WorkItemModel[] = [];
-    this.workItems.controls.forEach((x) =>
-      workItems.push({
-        description: x.value.description,
-        durationMins: x.value.hours * 60,
-      } as WorkItemModel)
-    );
+    this.workItems.controls.forEach((x) => {
+      if (x.value.description !== '' && x.value.hours !== 0) {
+        workItems.push({
+          id: x.value.id,
+          description: x.value.description,
+          durationMins: x.value.hours * 60,
+        } as WorkItemModel);
+      }
+    });
 
     return workItems;
   }
@@ -148,13 +137,14 @@ export class InvoiceCreateComponent implements OnInit {
     this.router.navigate(['invoices']);
   }
 
-  onCreate() {
+  onCreateOrUpdate() {
     if (this.invoiceForm.invalid) {
       return;
     }
 
     const values = this.invoiceForm.value;
     const invoiceToAdd: InvoiceModel = {
+      id: this.invoiceNumber,
       projectId: values.selectedProject,
       invoiceDate: new Date().toISOString().split('T')[0],
       dueDate: values.dueDate,
@@ -164,11 +154,10 @@ export class InvoiceCreateComponent implements OnInit {
       periodEndDate: values.period.endDate,
     };
 
-    console.log(invoiceToAdd);
-
-    this.invoiceService.addInvoice(invoiceToAdd);
-    this.changesSaved = true;
-    this.navigateToInvoices();
+    this.invoiceService.addOrUpdateInvoice(invoiceToAdd).subscribe((r) => {
+      this.changesSaved = true;
+      this.navigateToInvoices();
+    });
   }
 
   onCancel(): void {

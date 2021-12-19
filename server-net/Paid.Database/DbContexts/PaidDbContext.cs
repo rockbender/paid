@@ -127,7 +127,7 @@ namespace Paid.Database.DbContexts
                 entity.HasOne(d => d.Invoice)
                     .WithMany(p => p.WorkItems)
                     .HasForeignKey(d => d.InvoiceId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("invoice_work_item");
             });
 

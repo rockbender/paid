@@ -92,7 +92,14 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   deleteInvoice(): void {
-    this.invoiceService.deleteInvoice(this.invoiceNumber);
-    this.router.navigate(['/']);
+    const hasConfirmed = window.confirm(
+      'Are you sure you want to delete this invoice?'
+    );
+
+    if (hasConfirmed) {
+      this.invoiceService
+        .deleteInvoice(this.invoiceNumber)
+        .subscribe((r) => this.router.navigate(['/']));
+    }
   }
 }

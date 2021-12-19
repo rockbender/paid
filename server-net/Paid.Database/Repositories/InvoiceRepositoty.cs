@@ -87,5 +87,23 @@ namespace Paid.Database.Repositories
                 .OrderByDescending(x => x.InvoiceId)
                 .ToArray();
         }
+
+    public async Task<Invoice> UpdateInvoiceAsync(InvoiceModel invoiceModel)
+    {
+            var existingInvoice = _dbContext.Invoices
+                .Include(c => c.WorkItems)
+                .SingleOrDefault(x => x.Id == invoiceModel.Id);
+
+            if(existingInvoice == null)
+            {
+                return null;
+            }
+
+            _mapper.Map<InvoiceModel, Invoice>(invoiceModel, existingInvoice);
+            _dbContext.Update<Invoice>(existingInvoice);
+            await _dbContext.SaveChangesAsync();
+
+            return existingInvoice;
+    }
   }
 }

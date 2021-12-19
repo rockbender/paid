@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Invoice, InvoiceModel } from '../models/Invoice';
 import { environment as env } from 'src/environments/environment';
 import { InvoiceListModel } from '../models/InvoiceListModel';
@@ -26,13 +26,16 @@ export class InvoiceService {
     // return result.length == 1 ? result[0] : null;
   }
 
-  addInvoice(invoice: InvoiceModel): void {
-    this.http
-      .post<InvoiceModel>(`${env.apiUrl}/invoices`, invoice)
-      .subscribe((r) => console.log('invoice submitted'));
+  addOrUpdateInvoice(invoice: InvoiceModel): Observable<InvoiceModel> {
+    if (invoice.id > 0) {
+      console.log('Update invoice', invoice);
+      return this.http.put<InvoiceModel>(`${env.apiUrl}/invoices`, invoice);
+    }
+
+    return this.http.post<InvoiceModel>(`${env.apiUrl}/invoices`, invoice);
   }
 
-  deleteInvoice(invoiceNumber: number): void {
-    this.http.delete(`${env.apiUrl}/invoices/${invoiceNumber}`).subscribe();
+  deleteInvoice(invoiceNumber: number): Observable<Object> {
+    return this.http.delete(`${env.apiUrl}/invoices/${invoiceNumber}`);
   }
 }

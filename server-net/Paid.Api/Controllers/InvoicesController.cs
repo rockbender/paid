@@ -55,6 +55,14 @@ namespace Paid.Api.Controllers
             return CreatedAtRoute("GetInvoice", new { id = newInvoice.Id }, newInvoice);
         }
 
+        [HttpPut]
+        [ProducesResponseType(typeof(Invoice), StatusCodes.Status200OK)]
+        public async Task<ActionResult<Invoice>> UpdateInvocieAsync(InvoiceModel model)
+        {
+            var invocieToupdate = await _invoiceRepo.UpdateInvoiceAsync(model);
+            return CreatedAtRoute("GetInvoice", new { id = invocieToupdate.Id }, invocieToupdate);
+        }
+
         [HttpDelete("{invoiceId}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]

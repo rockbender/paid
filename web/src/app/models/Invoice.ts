@@ -15,6 +15,7 @@ export interface WorkItem {
 }
 
 export interface InvoiceModel {
+  id: number;
   projectId: number;
   invoiceDate: string;
   dueDate: string;

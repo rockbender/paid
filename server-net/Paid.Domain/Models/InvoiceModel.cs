@@ -4,6 +4,7 @@ namespace Paid.Domain.Models
 {
     public class InvoiceModel
     {
+        public int Id { get; set; }
         public int ProjectId { get; set; }
         public DateTime InvoiceDate { get; set; }
         public DateTime DueDate { get; set; }
