@@ -1,0 +1,23 @@
+<div class="container">
+  <app-menubar></app-menubar>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects">
+        <td>
+          <a [routerLink]="['/invoice', project.id]">{{
+            project.description
+          }}</a>
+        </td>
+        <td>{{ project.description }}</td>
+        <td>{{ project.rateCents / 100 | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
