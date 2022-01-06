@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InvoiceCreateGuard } from './guards/invoice-create.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { ProjectListComponent } from './components/project-list/project-list.component';
+import { ProjectCreateComponent } from './components/project-create/project-create.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ProjectListComponent } from './components/project-list/project-list.com
     InvoiceDetailComponent,
     InvoiceCreateComponent,
     ProjectListComponent,
+    ProjectCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,7 @@ import { ProjectListComponent } from './components/project-list/project-list.com
       { path: 'edit-invoice/:id', component: InvoiceCreateComponent },
       { path: 'timesheets', component: TimesheetListComponent },
       { path: 'projects', component: ProjectListComponent },
+      { path: 'new-project', component: ProjectCreateComponent },
       { path: 'settings', component: SettingsComponent },
     ]),
   ],
