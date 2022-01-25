@@ -32,7 +32,7 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [x] Home page loads invoices from db
 - [x] Created invoice saves to db
 - [ ] Can add a project
-- [ ] Can view list of projects
+- [x] Can view list of projects
 - [x] Can select a project when creating an invoice with dropdowns
 - [ ] Hide infobar in all create/detail page
 - [x] Fix print margins
