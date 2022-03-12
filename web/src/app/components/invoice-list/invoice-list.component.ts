@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InvoiceListModel } from 'src/app/models/InvoiceListModel';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoice-list',
@@ -9,12 +10,14 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 })
 export class InvoiceListComponent implements OnInit {
   invoices: InvoiceListModel[] = [];
+  isLoading = true;
 
   constructor(private invoiceService: InvoiceService) {}
 
   ngOnInit(): void {
     this.invoiceService
       .getInvoices()
+      .pipe(finalize(() => (this.isLoading = false)))
       .subscribe((result) => (this.invoices = result));
   }
 }

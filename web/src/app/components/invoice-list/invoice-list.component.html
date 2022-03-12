@@ -1,6 +1,7 @@
 <div class="container">
   <app-menubar createLink="new-invoice"></app-menubar>
-  <table class="table">
+  <div *ngIf="isLoading" class="text-center">Loading...</div>
+  <table *ngIf="!isLoading" class="table">
     <thead>
       <tr>
         <th>Invoice #</th>
