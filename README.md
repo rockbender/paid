@@ -3,6 +3,7 @@
 Paid web app, to manage timesheet and invoices for consultants, with light revenue tracking.
 
 ## Features
+
 - Home page with a list of invoices to view
 - Timesheet page to manage list of timesheets
 - Settings Page to manage projects and rates, and schedule
@@ -13,20 +14,23 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - Toast Notification
 
 ## Release Notes v.0.3
+
 - [ ] Add Create Invoice Validation in UI
 - [ ] Add Create Invoice validation in API
 
 ## Release Notes v.0.2 (with-api)
-- [ ] Home page loads invoices from db
-- [ ] Created invoice saves to db
+
+- [x] Home page loads invoices from db
+- [x] Created invoice saves to db
 - [ ] Can add a project
-- [ ] Can view list of projects
-- [ ] Can select a project when creating an invoice with dropdowns
+- [x] Can view list of projects
+- [x] Can select a project when creating an invoice with dropdowns
 - [ ] Time range on invoice creation is optional
 - [ ] Hide infobar in all create/detail page
-- [ ] Fix print margins
+- [x] Fix print margins
 
 ## Release Notes v.0.1 (no-api)
+
 - [x] Home page load in-memory invoices in tabular format
 - [x] Can create a new invoice and add to in-memory data
 - [x] On create Invoice, get invoice total from work items
@@ -35,6 +39,7 @@ Paid web app, to manage timesheet and invoices for consultants, with light reven
 - [x] Add navigation guard to invoice create page
 
 ## Components
+
 ```
 app
   header
@@ -48,13 +53,14 @@ app
 ```
 
 ## Router
+
 ```json
 {
   "/": "/home",
   "/invoices": "invoices",
   "/invoices/:id": "invoice-detail",
   "/timesheeta": "timesheets",
-  "/settings": "settings",
+  "/settings": "settings"
 }
 ```
 
