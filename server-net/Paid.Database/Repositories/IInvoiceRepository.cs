@@ -11,7 +11,7 @@ namespace Paid.Database.Repositories
         Task<InvoiceListModel[]> GetInvoicesAsync(InvoiceQueryParameter queryParams);
         Task<InvoiceDetailModel> GetInvoiceByIdAsync(int id);
         Task<Invoice> AddInvoiceAsync(InvoiceModel invoice);
-        Task DeleteInvoice(int invoiceId);
+        Task DeleteInvoiceAsync(int invoiceId);
         Task<Invoice> UpdateInvoiceAsync(InvoiceModel invoice);
   }
 }

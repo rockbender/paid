@@ -10,12 +10,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Paid.Database.Repositories
 {
-    public class InvoiceRepositoty : IInvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
         private PaidDbContext _dbContext;
         private IMapper _mapper;
 
-        public InvoiceRepositoty(PaidDbContext dbContext, IMapper mapper)
+        public InvoiceRepository(PaidDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace Paid.Database.Repositories
             return newInvoice;
         }
 
-    public async Task DeleteInvoice(int invoiceId)
+    public async Task DeleteInvoiceAsync(int invoiceId)
     {
       var existingInvoice = await _dbContext.Invoices.SingleOrDefaultAsync(x => x.Id == invoiceId);
 

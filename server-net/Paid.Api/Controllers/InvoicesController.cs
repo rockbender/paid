@@ -75,7 +75,7 @@ namespace Paid.Api.Controllers
                 return NotFound();
             }
 
-            await _invoiceRepo.DeleteInvoice(invoiceId);
+            await _invoiceRepo.DeleteInvoiceAsync(invoiceId);
             return NoContent();
         }
     }

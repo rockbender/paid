@@ -32,7 +32,7 @@ namespace Paid.Api
             ));
 
             services.AddControllers();
-            services.AddScoped<IInvoiceRepository, InvoiceRepositoty>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             services.AddScoped<IProjectRepository, ProjectRepository>();
             services.AddDbContext<PaidDbContext>(options =>
             {
