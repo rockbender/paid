@@ -25,6 +25,7 @@ namespace Paid.Api.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(InvoiceListModel[]), StatusCodes.Status200OK)]
         public async Task<ActionResult<InvoiceListModel[]>> GetInvoicesAsync([FromQuery] InvoiceQueryParameter queryParams)
         {
